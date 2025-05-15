@@ -115,10 +115,9 @@ def batch_process(input_dir: str, output_dir: str):
 
         # 处理当前目录中的PDF文件
         for filename in files:
-            file_path = os.path.join(root, filename)
-
-            if filename.lower().endswith(".pdf"):
-                in_path = os.path.join(root, filename)
+            in_path = os.path.join(root, filename)
+            # 确保是文件而不是目录，并且是PDF文件
+            if os.path.isfile(in_path) and filename.lower().endswith(".pdf"):
                 out_path = os.path.join(current_output_dir, filename)
                 if cleaner.clean_pdf(in_path, out_path):
                     print(f"已成功处理: {in_path}")
